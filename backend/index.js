@@ -2,13 +2,15 @@ import express from 'express';
 import userRoutes from './routes/user.js';
 import connectDB from './connection.js';
 import logReqRes from './middlewares/index.js';
+import dotenv from 'dotenv';
 
+dotenv.config();
 
 const app = express();
 const PORT = 3000;
 
 //mongo connection
-connectDB(`mongodb+srv://CRUD:crud123@cluster0.ddoxc5b.mongodb.net/`).then(() => {
+connectDB(process.env.MONGO_URI).then(() => {
     console.log('✅ MongoDB connected');
 }).catch((err) => {
     console.error('❌ MongoDB connection error:', err);
